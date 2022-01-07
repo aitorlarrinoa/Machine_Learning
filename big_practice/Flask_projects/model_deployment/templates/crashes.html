@@ -1,0 +1,256 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <!-- Starts image section -->
+    <div class="row justify-content-md-center mb-4">
+        <h2 class='text-primary'>Predict Canadian crashes</h2>
+    </div>
+    <!-- Ends image section -->
+    
+    <!-- Starts form section -->
+    <div class="form-container ">
+        <form class="form-horizontal" action = "/predict/" method="post">
+        
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="num_C_YEAR">Year of the crash:</label>
+              <div class="col-sm-4">
+                <input type="number" class="form-control" id="num_C_YEAR" name="num_C_YEAR">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_MNTH">Month of the crash (number):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="C_MNTH" name="C_MNTH">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_WDAY">Day of the week of the crash (number):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="C_WDAY" name="C_WDAY">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_HOUR">Hour of the crash (number):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="C_HOUR" name="C_HOUR">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="num_C_VEHS">Number of vehicles involved:</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="num_C_VEHS" name="num_C_VEHS">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="num_Random">Random number between 1 and 100:</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="num_Random" name="num_Random">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x0_01">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x0_01" name="ohe_x0_01">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x0_02">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x0_02" name="ohe_x0_02">
+              </div>
+            </div>
+            
+	   <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x0_03">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x0_03" name="ohe_x0_03">
+              </div>
+            </div>
+
+	   <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x0_04">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x0_04" name="ohe_x0_04">
+              </div>
+            </div>
+
+	   <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x0_QQ">Year of the crash:</label>
+              <div class="col-sm-4">
+                <input type="number" class="form-control" id="ohe_x0_QQ" name="ohe_x0_QQ">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x0_None">Month of the crash (cosine):</label>
+              <div class="col-dm-4">          
+                <input type="number" class="form-control" id="ohe_x0_None" name="ohe_x0_None">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x1_01">Month of the crash (sine):</label>
+              <div class="col-sm-4">
+                <input type="number" class="form-control" id="ohe_x1_01" name="ohe_x1_01">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x1_02">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x1_02" name="ohe_x1_02">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x1_QQ">Day of the week of the crash (sine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x1_QQ" name="ohe_x1_QQ">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x1_None">Hour of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x1_None" name="ohe_x1_None">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x2_01">Hour of the crash (sine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x2_01" name="ohe_x2_01">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x2_02">Number of vehicles involved:</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x2_02" name="ohe_x2_02">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x2_Q">Random number between 1 and 100:</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x2_Q" name="ohe_x2_Q">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x2_None">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x2_None" name="ohe_x2_None">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x3_01">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x3_01" name="ohe_x3_01">
+              </div>
+            </div>
+            
+	   <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x3_02">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x3_02" name="ohe_x3_02">
+              </div>
+            </div>
+
+	   <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x3_Q">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x3_Q" name="ohe_x3_Q">
+              </div>
+            </div>
+
+
+	    <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x3_None">Hour of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x3_None" name="ohe_x3_None">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x4_01">Hour of the crash (sine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x4_01" name="ohe_x4_01">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x4_02">Number of vehicles involved:</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x4_02" name="ohe_x4_02">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x4_Q">Random number between 1 and 100:</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x4_Q" name="ohe_x4_Q">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x4_None">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x4_None" name="ohe_x4_None">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x5_01">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x5_01" name="ohe_x5_01">
+              </div>
+            </div>
+            
+	   <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x5_03">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x5_03" name="ohe_x5_03">
+              </div>
+            </div>
+
+	   <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x5_QQ">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x5_QQ" name="ohe_x5_QQ">
+              </div>
+            </div>
+
+	   <div class="form-group row">
+              <label class="control-label col-sm-2" for="ohe_x5_None">Day of the week of the crash (cosine):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="ohe_x5_None" name="ohe_x5_None">
+              </div>
+            </div>
+
+
+	   <div class="form-group row"> 
+            <label class="control-label col-sm-2" for="">&nbsp;</label>                
+              <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-primary">Predict</button>
+              </div>
+            </div>
+
+
+          </form>
+        <!-- Ends form section -->
+        
+        
+    </div>
+
+
+{% endblock %}
