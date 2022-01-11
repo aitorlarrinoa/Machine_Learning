@@ -196,16 +196,22 @@ def reemplazar_NAs(dataset, target, columns_mode, var_referencia):
 
 # ## FUNCIONES PARA EL NOTEBOOK 03(MODELOS)
 
+# La función metrica_new es una métrica creada por nosotros en la que crearemos una media ponderada sobre la matriz de confusión normalizada. Ponderaremos con mayor valor el acierto de fallecimientos que el acierto de no fallecimientos.
+
+def metrica_new(ytest, predictions, k=2):
+    cm_norm = confusion_matrix(ytest, predictions, normalize="true")
+    return (k*cm_norm[0][0] + cm_norm[1][1])/(k+1) 
+
 # La función medidas es una función que nos permitirá conocer las métricas f1, accuracy y roc_score de cada modelo que vayamos obteniendo. Todo ello será presentado en un data frame de una única fila y 3 columnas
 
 # In[11]:
-
 
 def medidas(ytest, predictions, predictions_proba):
     ROC_score = list()
     F1_1 = list()
     acc_1 = list()
     recall=list()
+    met_new = list()
     roc_score = roc_auc_score(ytest, predictions_proba[:,1])
     ROC_score.append(roc_score)
     f1 = f1_score(ytest, predictions)
@@ -214,9 +220,11 @@ def medidas(ytest, predictions, predictions_proba):
     acc_1.append(ac)
     rec = recall_score(ytest, predictions)
     recall.append(rec)
-    data = {'F1': F1_1, "accuracy" :acc_1, 'roc_score':ROC_score, "recall":recall}
+    met = metrica_new(ytest, predictions)
+    met_new.append(met)
+    data = {'F1': F1_1, "accuracy" :acc_1, 'roc_score':ROC_score, "recall":recall, "met_new":met_new}
 
-    return pd.DataFrame(data, columns=["F1", 'roc_score', 'accuracy', "recall"])
+    return pd.DataFrame(data, columns=["F1", 'roc_score', 'accuracy', "recall", "met_new"])
 
 
 # La función modelos nos permitirá entrenar un modelo y hallar predicciones del mismo. Esta función será útil para encapsular código y no tener que escribir la misma estructura para todos los modelos que se calcularán. Además, esta función también nos devolverá el tiempo de computo para el modelo
