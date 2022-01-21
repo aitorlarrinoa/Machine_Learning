@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="row justify-content-md-center mb-4">
+        <h3 class='text-primary'>Prediction is {{ prediction[0] }}</h3>
+    
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="thumbnail">
+            {% if prediction[0] == 1 %}
+                <img src="{{url_for('static', filename='Images/vivo.jpg')}}" class="img-thumbnail" />
+		<p></p>
+		<p></p>
+		<p>This is, there are no fatalitites</p>
+            {% endif %}
+        </div>
+    </div>
+        
+    <div class="row justify-content-md-center">
+        <div class="thumbnail">
+            {% if prediction[0] == 0 %}
+                <img src="{{url_for('static', filename='Images/muerto.jpg')}}" class="img-thumbnail" />
+		<p></p>
+		<p></p>
+		<p>This is, there is at least one fatality</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

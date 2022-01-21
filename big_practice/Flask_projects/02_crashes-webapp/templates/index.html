@@ -1,0 +1,228 @@
+{% extends "layout.html" %}
+
+{% block content %}    
+<!-- Starts image section -->
+    <div class="row justify-content-md-center mb-4">
+        <h2 class='text-primary'>Predict Canadian crashes</h2>
+    </div>
+    <!-- Ends image section -->
+    
+    <!-- Starts form section -->
+    <div class="form-container ">
+        <form class="form-horizontal" action = "/predict/" method="post">
+        
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="num_C_YEAR">Year of the crash:</label>
+              <div class="col-sm-4">
+                <input type="number" class="form-control" id="num_C_YEAR" name="num_C_YEAR">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_MNTH">Month of the crash (number):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="C_MNTH" name="C_MNTH">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_WDAY">Day of the week of the crash (number):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="C_WDAY" name="C_WDAY">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_HOUR">Hour of the crash (number):</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="C_HOUR" name="C_HOUR">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="num_C_VEHS">Number of vehicles involved:</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="num_C_VEHS" name="num_C_VEHS">
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="num_Random">Random number between 1 and 100:</label>
+              <div class="col-sm-4">          
+                <input type="number" class="form-control" id="num_Random" name="num_Random">
+              </div>
+            </div>
+
+            
+	    <body>
+		<p>Now we have to introduce some categorical variables. We will explain what input to introduce.<p>
+		<p> The first variable is the collision configuration . We have six options and one has to be decided. The options are the following:<p>
+		<ul>
+ 		  <li>1: Single vehicle in motion</li>
+ 		  <li>2: Two vehicles in motion (same direction)</li>
+		  <li>3: Two vehicles in motion (different direction)</li>
+		  <li>4: Two vehicles-hit a parked motor vehicle</li>
+		  <li>5: Different situation to previous situations</li>
+		  <li>6: There is no information</li>
+		</ul>		
+		
+	    </body>
+
+	    <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_CONF">Collision configuration:</label>
+				<select name="C_CONF" id="C_CONF">
+   					<option value="1">1</option> 
+   					<option value="2">2</option> 
+   					<option value="3">3</option>
+   					<option value="4">4</option> 
+   					<option value="5">5</option> 
+   					<option value="6">6</option> 
+				</select>
+              <div class="col-sm-4">          
+              </div>
+            </div>
+	    <body>
+
+	    <body>
+		<p> The second variable is the roadway configuration . We have four options and one has to be decided. The options are the following:<p>
+		<ul>
+ 		  <li>1: None intersection</li>
+ 		  <li>2: Intersection, bridge or other element that disturbs the road</li>
+		  <li>3: Different situation to previous situations</li>
+		  <li>4: There is no information</li>
+		</ul>		
+		
+	    </body>
+
+
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_RCFG">Roadway configuration:</label>
+				<select name="C_RCFG" id="C_RCFG">
+   					<option value="1">1</option> 
+   					<option value="2">2</option> 
+   					<option value="3">3</option>
+   					<option value="4">4</option> 
+				</select>
+              <div class="col-sm-4">          
+              </div>
+            </div>
+
+	    <body>
+
+	    <body>
+		<p> The third variable is the weather condition. We have four options and one has to be decided. The options are the following:<p>
+		<ul>
+ 		  <li>1: Favorable Climate</li>
+ 		  <li>2: Unfavorable Climate</li>
+		  <li>3: Different situation to previous situations</li>
+		  <li>4: There is no information</li>
+		</ul>		
+		
+	    </body>
+
+
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_WTHR">Weather condition:</label>
+				<select name="C_WTHR" id="C_WTHR">
+   					<option value="1">1</option> 
+   					<option value="2">2</option> 
+   					<option value="3">3</option>
+   					<option value="4">4</option> 
+				</select>
+              <div class="col-sm-4">          
+              </div>
+            </div>
+
+
+	    <body>
+		<p> The fourth variable is the road surface. We have four options and one has to be decided. The options are the following:<p>
+		<ul>
+ 		  <li>1: Standard road conditions</li>
+ 		  <li>2: Unfavorable, adverse road conditions</li>
+		  <li>3: Different situation to previous situations</li>
+		  <li>4: There is no information</li>
+		</ul>		
+		
+	    </body>
+
+
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_RSUR">Road surface:</label>
+				<select name="C_RSUR" id="C_RSUR">
+   					<option value="1">1</option> 
+   					<option value="2">2</option> 
+   					<option value="3">3</option>
+   					<option value="4">4</option> 
+				</select>
+              <div class="col-sm-4">          
+              </div>
+            </div>
+
+
+
+
+	    <body>
+		<p> The fifth variable is the road alignment. We have four options and one has to be decided. The options are the following:<p>
+		<ul>
+ 		  <li>1: Straight and level road</li>
+ 		  <li>2: Curved, gradient and non-straight roads</li>
+		  <li>3: Different situation to previous situations</li>
+		  <li>4: There is no information</li>
+		</ul>		
+		
+	    </body>
+
+
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_RALN">Road alignment:</label>
+				<select name="C_RALN" id="C_RALN">
+   					<option value="1">1</option> 
+   					<option value="2">2</option> 
+   					<option value="3">3</option>
+   					<option value="4">4</option> 
+				</select>
+              <div class="col-sm-4">          
+              </div>
+            </div>
+
+
+	    <body>
+		<p> The fifth variable is the traffic control. We have four options and one has to be decided. The options are the following:<p>
+		<ul>
+ 		  <li>1: Traffic signals operational</li>
+ 		  <li>2: Signs and other stuff</li>
+		  <li>3: Different situation to previous situations</li>
+		  <li>4: There is no information</li>
+		</ul>		
+		
+	    </body>
+
+
+            <div class="form-group row">
+              <label class="control-label col-sm-2" for="C_TRAF">Traffic control:</label>
+				<select name="C_TRAF" id="C_TRAF">
+   					<option value="1">1</option> 
+   					<option value="2">2</option> 
+   					<option value="3">3</option>
+   					<option value="4">4</option> 
+				</select>
+              <div class="col-sm-4"> 
+              </div>
+            </div>
+
+
+	   <div class="form-group row"> 
+            <label class="control-label col-sm-2" for="">&nbsp;</label>                
+              <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-primary">Predict</button>
+              </div>
+            </div>
+
+
+          </form>
+        <!-- Ends form section -->
+        
+        
+    </div>
+
+{% endblock %}
